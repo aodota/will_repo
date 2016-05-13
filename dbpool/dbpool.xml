@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<db>
+		<name>will.game</name>
+		<driver>com.mysql.jdbc.Driver</driver>
+		<user>root</user>
+		<password>1234</password>
+		
+		<poolCheckInterval>5000</poolCheckInterval>
+		
+		<minConn>20</minConn>
+		<maxConn>50</maxConn>
+
+		<connAliveTime>60000</connAliveTime>
+		<checkInterval>60000</checkInterval>
+		<testBeforeUse>true</testBeforeUse>
+		<testSql>select 1</testSql>
+		<url>jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&amp;characterEncoding=utf8&amp;autoReconnect=true</url>
+	</db>
+</config>
