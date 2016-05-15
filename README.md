@@ -6,3 +6,6 @@
 
 ### Markdown编辑指南
 * [Markdown编辑指南](Markdown编辑指南.md)
+
+### Gradle使用手册
+* [Gradle使用手册](Gradle使用手册.md)
