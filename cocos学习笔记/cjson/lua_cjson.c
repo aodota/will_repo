@@ -40,8 +40,8 @@
 #include <string.h>
 #include <math.h>
 #include <limits.h>
-#include "lua_cjson.h"
 
+#include "lua_cjson.h"
 
 #ifndef CJSON_MODNAME
 #define CJSON_MODNAME   "cjson"
