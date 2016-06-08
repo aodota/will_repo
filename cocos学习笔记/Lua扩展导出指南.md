@@ -7,11 +7,11 @@ Lua扩展导出指南
 - [下载地址](http://webserver2.tecgraf.puc-rio.br/~lhf/ftp/lua/#lpack)
 
 ### 问题解决
-> 1. `void *` 不能自动转换成`char *`
+> `void *` 不能自动转换成`char *`
 
 显示添加强制转换
 
-> 2. 链接错误
+> 链接错误
 
 因为是C++项目，EXE引用的lua头文件必须这样写
 
@@ -22,7 +22,7 @@ extern "C" {
 #include "lauxlib.h"
 }
 ```
-> 3. 重复定义
+> 重复定义
 
 建立`lpack.h`，内容如下：
 
@@ -43,7 +43,7 @@ int luaopen_pack(lua_State *L);
 
 ### 导出到Lua
 
-1. 建立`lua_export.h`
+1) 建立`lua_export.h`
 
 ```C
 #pragma once
@@ -61,7 +61,7 @@ void luaopen_lua_exts(lua_State *L);
 #endif
 ```
 
-2. 建立`lua_export.c`
+2) 建立`lua_export.c`
 
 ```C
 #include "lua_export.h"
@@ -93,7 +93,7 @@ void luaopen_lua_exts(lua_State *L)
 - [下载地址](http://zlib.net/)
 
 ### 问题解决
-1.建立`lua_zlib.h`文件
+1) 建立`lua_zlib.h`文件
 
 ```C
 #ifndef LUA_ZLIB_H__1
@@ -126,7 +126,7 @@ LUALIB_API int luaopen_zlib(lua_State *L);
 
 ```
 
-2.`lua_zlib.c`头部修改如下
+2) `lua_zlib.c`头部修改如下
 
 ```C
 #include <ctype.h>
@@ -136,7 +136,7 @@ LUALIB_API int luaopen_zlib(lua_State *L);
 #include "lua_zlib.h"
 ```
 
-3.添加导出
+3) 添加导出
 
 在`lua_export.c`中添加
 
@@ -155,7 +155,7 @@ static luaL_Reg lua_exts[] = {
 ### 下载&安装
 - [下载地址](http://www.kyne.com.au/~mark/software/lua-cjson.php)
 
-### 添加`lua_cjson.h`
+1) 建立`lua_cjson.h`
 
 ```C
 #ifndef __LUA_CJSON_H_
@@ -182,7 +182,7 @@ int luaopen_cjson_safe(lua_State *l);
 **注意：**其他步骤和上面2个类似
 
 ## 总结
-1. vs2015时导入c的头文件时候一定要用如下方式导入
+1) vs2015时导入c的头文件时候一定要用如下方式导入
 ```C
 extern "C" {
     // 要导入的头文件
