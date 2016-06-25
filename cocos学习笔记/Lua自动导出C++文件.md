@@ -57,15 +57,15 @@ cmd_args = {
 ## 四、常见错误以及解决方法
 
 1. `C:\Program`未知命令
-> 解决方法：
-> 1. Python直接安装到不带空格的目录。 
+> 解决方法：<br>
+> 1. Python直接安装到不带空格的目录。 <br>
 > 2. 使用`progra~1`代替`Program Files`
 
 2. `"'winsock2.h' file not found"`某个头文件找不到
-> 解决办法：
-> 1. 首先将需要导出的头文件中对相关文件的引用去除，我导出`CCHttpRequest`就去除了'curl.h'的引用，并且修改头文件使之编译通过。这里掌握的原则就是不影响导出内容即可。
-> 2. 找到缺失的.h文件，添加到`cocos_headers`里
-> <br>下面是我对`CCHttpRequest.h`的修改：
+> 解决办法：<br>
+> 1. 首先将需要导出的头文件中对相关文件的引用去除，我导出`CCHttpRequest`就去除了'curl.h'的引用，并且修改头文件使之编译通过。这里掌握的原则就是不影响导出内容即可。<br>
+> 2. 找到缺失的.h文件，添加到`cocos_headers`里<br>
+> 下面是我对`CCHttpRequest.h`的修改：
 
 	```cpp
 	//#include "curl/curl.h"
