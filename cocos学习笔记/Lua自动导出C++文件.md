@@ -15,6 +15,7 @@ Lua自动导出C++文件
 - `prefix = cocos2dx_httprequest`这个建议和文件名保持一致，否则也可能导致提示`Section not found in config file`错误
 - `target_namespace = cc`这个是你需要将你的包导入到的命名空间，建议使用`cc`，我们使用的是Cocos啊，哈哈
 - `cocos_headers` 头文件查找地址，这个可以先只添加你需要导出的头文件地址，后续报错时候再添加依赖的头文件地址
+- `headers = %(cocosdir)s/tools/simulator/libsimulator/lib/network/CCHTTPRequest.h` 需要导出的头文件
 - 各项具体含义脚本中有解释，如不清楚可参考这篇文章[文章1][1]、[文章2][2]
 
 ## 三、修改`genbindings.py`
