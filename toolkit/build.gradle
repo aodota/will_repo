@@ -40,6 +40,7 @@ dependencies {
             'asm:asm-all:3.3.1',
             'aopalliance:aopalliance:1.0',
             'antlr:antlr:2.7.7',
+            'org.apache.zookeeper:zookeeper:3.4.8',
 
     )
     testCompile group: 'junit', name: 'junit', version: '4.11'
