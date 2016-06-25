@@ -115,6 +115,25 @@ cmd_args = {
 	```
 
 
+## 五、添加到LuaStack，供Lua使用
+
+我是放在项目的`Classes`的`auto`文件夹下，修改`AppDelegate.cpp`引入导出的类，代码如下：
+
+```cpp
+#include "auto/lua_cocos2dx_httprequest_auto.hpp"
+
+// 省略其他代码
+...
+
+// register custom function
+static int register_constom_lua(lua_State* L)
+{
+    register_all_cocos2dx_httprequest(L);
+	return 0;
+}
+```
+
+编译项目，成功后Lua就可以使用啦~~
 
 [1]: http://www.cocoachina.com/bbs/read.php?tid=196416
 [2]: http://www.cocoachina.com/bbs/read.php?tid-226362-page-1.html
