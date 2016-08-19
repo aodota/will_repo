@@ -8,20 +8,20 @@ import java.io.IOException;
  * Created by WILL on 2016/5/29.
  */
 public class ZookeeperExample1 {
-    public static void main(String[] args) throws IOException, KeeperException, InterruptedException {
+    public static void main(String[] args) throws Exception {
         ZooKeeper zk = new ZooKeeper("127.0.0.1:2181", 2000, new Watcher() {
             @Override
             public void process(WatchedEvent event) {
-                System.out.println("已经触发了" + event.getType() + "事件！");
+                System.out.println("已经触发了" + event.getType() + "事件！ Path:" + event.getPath());
             }
         });
-
+        ZkUtils.safeCreate(zk, "/testRootPath", "testRootData".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE,CreateMode.PERSISTENT);
         // 创建一个目录节点
-        zk.create("/testRootPath", "testRootData".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE,
-                CreateMode.PERSISTENT);
+//        zk.create("/testRootPath", "testRootData".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE,
+//                CreateMode.PERSISTENT);
         // 创建一个子目录节点
         zk.create("/testRootPath/testChildPathOne", "testChildDataOne".getBytes(),
-                ZooDefs.Ids.OPEN_ACL_UNSAFE,CreateMode.PERSISTENT);
+                ZooDefs.Ids.OPEN_ACL_UNSAFE,CreateMode.EPHEMERAL_SEQUENTIAL);
         System.out.println(new String(zk.getData("/testRootPath",false,null)));
         // 取出子目录节点列表
         System.out.println(zk.getChildren("/testRootPath",true));
@@ -30,7 +30,7 @@ public class ZookeeperExample1 {
         System.out.println("目录节点状态：["+zk.exists("/testRootPath",true)+"]");
         // 创建另外一个子目录节点
         zk.create("/testRootPath/testChildPathTwo", "testChildDataTwo".getBytes(),
-                ZooDefs.Ids.OPEN_ACL_UNSAFE,CreateMode.PERSISTENT);
+                ZooDefs.Ids.OPEN_ACL_UNSAFE,CreateMode.EPHEMERAL_SEQUENTIAL);
         System.out.println(new String(zk.getData("/testRootPath/testChildPathTwo",true,null)));
         // 删除子目录节点
         zk.delete("/testRootPath/testChildPathTwo",-1);
