@@ -1,0 +1,76 @@
+group 'com.will'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'idea'
+sourceCompatibility = 1.7
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+repositories {
+//     mavenCentral()
+    maven {
+        url "http://127.0.0.1:8081/nexus/content/repositories/thirdparty/"
+    }
+}
+
+
+dependencies {
+    compile (
+            'org.apache.commons:commons-lang3:3.4',
+            'com.google.guava:guava:19.0',
+            'org.slf4j:slf4j-api:1.6.2',
+            'ch.qos.logback:logback-core:1.1.7',
+            'ch.qos.logback:logback-classic:1.1.7',
+            'org.apache.commons:commons-collections4:4.1',
+            'commons-logging:commons-logging-api:1.1.3',
+            'commons-logging:commons-logging:1.1.3',
+            'org.springframework:spring-aspects:4.2.6.RELEASE',
+            'org.springframework:spring-aop:4.2.6.RELEASE',
+            'org.springframework:spring-beans:4.2.6.RELEASE',
+            'org.springframework:spring-context:4.2.6.RELEASE',
+            'org.springframework:spring-context-support:4.2.6.RELEASE',
+            'org.springframework:spring-core:4.2.6.RELEASE',
+            'org.springframework:spring-jdbc:4.2.6.RELEASE',
+            'org.springframework:spring-orm:4.2.6.RELEASE',
+            'org.springframework:spring-tx:4.2.6.RELEASE',
+            'org.springframework:spring-expression:4.2.6.RELEASE',
+            'com.alibaba:fastjson:1.2.11',
+            'org.javassist:javassist:3.15.0-GA',
+            'asm:asm-all:3.3.1',
+            'aopalliance:aopalliance:1.0',
+            'antlr:antlr:2.7.7',
+            'org.apache.zookeeper:zookeeper:3.4.8',
+            'io.netty:netty-all:4.0.33.Final',
+            'org.will:tcp-framework:1.0.0'
+
+
+    )
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    testCompile group: 'org.hamcrest', name: 'hamcrest-core', version: '1.3'
+}
+
+// 源代码目录设置
+sourceSets {
+    main {
+        java {
+            srcDir 'java'
+        }
+        resources {
+            srcDir 'resources'
+        }
+    }
+}
+
+// MANIFEST.MF设置
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'gateway',
+                   'Implementation-Version': version
+    }
+}
+
+task helloWorld  {
+    doLast{
+        println ("Hello World!")
+    }
+}
