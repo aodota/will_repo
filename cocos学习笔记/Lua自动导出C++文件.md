@@ -133,6 +133,17 @@ static int register_constom_lua(lua_State* L)
 }
 ```
 
+## 六、修改CCHTTPRequest.h避免链接错误
+```cpp
+#ifndef CC_LUA_ENGINE_ENABLED
+#define CC_LUA_ENGINE_ENABLED 1
+#endif // !CC_LUA_ENGINE_ENABLED
+
+#if CC_LUA_ENGINE_ENABLED > 0
+#include "CCLuaEngine.h"
+#endif
+```
+
 编译项目，成功后Lua就可以使用啦~~
 
 [1]: http://www.cocoachina.com/bbs/read.php?tid=196416

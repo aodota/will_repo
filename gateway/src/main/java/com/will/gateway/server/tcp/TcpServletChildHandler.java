@@ -64,7 +64,6 @@ public class TcpServletChildHandler extends ChannelInitializer<SocketChannel> {
         handler.setServlet(servlet);
         handler.setServletContext(sc);
         
-//        ch.pipeline().addLast("flashPolicy", new FlashPolicyHandler());
         ch.pipeline().addLast("decoder", new MessageDecoder());
         ch.pipeline().addLast("encoder", new MessageEncoder());
         ch.pipeline().addLast("handler", handler);
