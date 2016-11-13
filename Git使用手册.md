@@ -14,6 +14,12 @@ Git使用手册
 # 初始化git
 git init
 
+# 创建一个全球用户名
+git config --global user.name "aodota"
+
+# 创建一个全球邮箱
+git config --global user.email "MY_NAME@example.com"
+
 # 存储git用户名和密码
 git config --global credential.helper store
 ```
