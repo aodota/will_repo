@@ -14,6 +14,7 @@ Git使用手册
 # 初始化git
 git init
 
+
 # 创建一个全球用户名
 git config --global user.name "aodota"
 
