@@ -7,7 +7,7 @@ cocos学习笔记
 
 - [Lua自动导出C++文件](Lua自动导出C++文件.md)
 
-- `cocos2d-x 3.11`需要添加`Core Text`，否则有如下报错
+- `cocos2d-x 3.13.1`需要添加`Core Text`，否则有如下报错
 
 ``` objective-c
 "_CTFramesetterCreateWithAttributedString", referenced from:
