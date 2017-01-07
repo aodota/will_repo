@@ -78,3 +78,7 @@ git config user.name "your_name"
 git config user.email "your_email"
 ```
 
+#### 6. SSH方式使用Git时，免秘钥就是生产rsa文件时候不要输入密码
+
+#### 7. HTTPS和SSH方式切换就是修改`gitproject/.git/config`里面的`url`
+
