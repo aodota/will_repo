@@ -73,7 +73,6 @@ public class PropertiesUtil {
      * 获取Key对应的值
      * @param clazz 类
      * @param key Key值
-     * @param args 参数
      * @return
      * @version 1.0.0.0 2011-9-28 下午04:26:58
      */
@@ -93,7 +92,6 @@ public class PropertiesUtil {
      * @param className 类名
      * @param key key值
      * @param _key 缓存key值
-     * @param args 参数
      * @return
      * @version 1.0.0.0 2011-9-28 下午04:28:56
      */
@@ -137,7 +135,7 @@ public class PropertiesUtil {
      * @return
      * @version 1.0.0.0 2011-9-28 下午04:29:00
      */
-    private static String getKey(String className, String key) {        
+    private static String getKey(String className, String key) {
         return new StringBuilder(50).append(className).append(SPLIT).append(key).toString();
     }
 

@@ -19,14 +19,14 @@ public class ByteBuffer {
     
     private int readerIndex;
     private int writerIndex;
-    
+    private ByteOrder byteOrder;
     
     /**
      * 构造函数
      * @param length
      */
     public ByteBuffer(int length) {
-        this(new byte[length], 0, 0);
+        this(new byte[length], 0, 0, ByteOrder.nativeOrder());
     }
     
     /**
@@ -34,7 +34,7 @@ public class ByteBuffer {
      * @param array
      */
     public ByteBuffer(byte[] array) {
-        this(array, 0, array.length);
+        this(array, 0, array.length, ByteOrder.nativeOrder());
     }
     
     /**
@@ -44,9 +44,20 @@ public class ByteBuffer {
      * @param writerIndex
      */
     public ByteBuffer(byte[] array, int readerIndex, int writerIndex) {
+        this(array, readerIndex, writerIndex, ByteOrder.nativeOrder());
+    }
+
+    /**
+     * 构造函数
+     * @param array
+     * @param readerIndex
+     * @param writerIndex
+     */
+    public ByteBuffer(byte[] array, int readerIndex, int writerIndex, ByteOrder byteOrder) {
         this.array = array;
         this.readerIndex = readerIndex;
         this.writerIndex = writerIndex;
+        this.byteOrder = byteOrder;
     }
     
     /**
@@ -99,8 +110,8 @@ public class ByteBuffer {
      * @param value
      * @version 1.0.0.0 2012-11-13 下午8:30:49
      */
-    public void writeShort(int value, ByteOrder byteOrder) {
-        setShort(writerIndex, value, byteOrder);
+    public void writeShort(int value) {
+        setShort(writerIndex, value);
         writerIndex += 2;
     }
 
@@ -109,8 +120,8 @@ public class ByteBuffer {
      * @param value
      * @version 1.0.0.0 2012-11-13 下午8:30:58
      */
-    public void writeMedium(int value, ByteOrder byteOrder) {
-        setMedium(writerIndex, value, byteOrder);
+    public void writeMedium(int value) {
+        setMedium(writerIndex, value);
         writerIndex += 3;
     }
 
@@ -119,8 +130,8 @@ public class ByteBuffer {
      * @param value
      * @version 1.0.0.0 2012-11-13 下午8:31:32
      */
-    public void writeInt(int value, ByteOrder byteOrder) {
-        setInt(writerIndex, value, byteOrder);
+    public void writeInt(int value) {
+        setInt(writerIndex, value);
         writerIndex += 4;
     }
 
@@ -129,8 +140,8 @@ public class ByteBuffer {
      * @param value
      * @version 1.0.0.0 2012-11-13 下午8:31:48
      */
-    public void writeLong(long value, ByteOrder byteOrder) {
-        setLong(writerIndex, value, byteOrder);
+    public void writeLong(long value) {
+        setLong(writerIndex, value);
         writerIndex += 8;
     }
 
@@ -139,8 +150,8 @@ public class ByteBuffer {
      * @param value
      * @version 1.0.0.0 2012-11-13 下午8:32:00
      */
-    public void writeChar(int value, ByteOrder byteOrder) {
-        writeShort(value, byteOrder);
+    public void writeChar(int value) {
+        writeShort(value);
     }
 
     /**
@@ -148,8 +159,8 @@ public class ByteBuffer {
      * @param value
      * @version 1.0.0.0 2012-11-13 下午8:32:10
      */
-    public void writeFloat(float value, ByteOrder byteOrder) {
-        writeInt(Float.floatToRawIntBits(value), byteOrder);
+    public void writeFloat(float value) {
+        writeInt(Float.floatToRawIntBits(value));
     }
 
     /**
@@ -157,8 +168,8 @@ public class ByteBuffer {
      * @param value
      * @version 1.0.0.0 2012-11-13 下午8:32:28
      */
-    public void writeDouble(double value, ByteOrder byteOrder) {
-        writeLong(Double.doubleToRawLongBits(value), byteOrder);
+    public void writeDouble(double value) {
+        writeLong(Double.doubleToRawLongBits(value));
     }
     
     /**
@@ -233,7 +244,7 @@ public class ByteBuffer {
      */
     public short readShort(ByteOrder byteOrder) {
         checkReadableBytes(2);
-        short v = getShort(readerIndex, byteOrder);
+        short v = getShort(readerIndex);
         readerIndex += 2;
         return v;
     }
@@ -267,7 +278,7 @@ public class ByteBuffer {
      */
     public int readUnsignedMedium(ByteOrder byteOrder) {
         checkReadableBytes(3);
-        int v = getUnsignedMedium(readerIndex, byteOrder);
+        int v = getUnsignedMedium(readerIndex);
         readerIndex += 3;
         return v;
     }
@@ -279,7 +290,7 @@ public class ByteBuffer {
      */
     public int readInt(ByteOrder byteOrder) {
         checkReadableBytes(4);
-        int v = getInt(readerIndex, byteOrder);
+        int v = getInt(readerIndex);
         readerIndex += 4;
         return v;
     }
@@ -300,7 +311,7 @@ public class ByteBuffer {
      */
     public long readLong(ByteOrder byteOrder) {
         checkReadableBytes(8);
-        long v = getLong(readerIndex, byteOrder);
+        long v = getLong(readerIndex);
         readerIndex += 8;
         return v;
     }
@@ -352,32 +363,32 @@ public class ByteBuffer {
         return (short) (getByte(index) & 0xFF);
     }
 
-    protected int getUnsignedShort(int index, ByteOrder byteOrder) {
-        return getShort(index, byteOrder) & 0xFFFF;
+    protected int getUnsignedShort(int index) {
+        return getShort(index) & 0xFFFF;
     }
 
-    protected int getMedium(int index, ByteOrder byteOrder) {
-        int value = getUnsignedMedium(index, byteOrder);
+    protected int getMedium(int index) {
+        int value = getUnsignedMedium(index);
         if ((value & 0x800000) != 0) {
             value |= 0xff000000;
         }
         return value;
     }
 
-    protected long getUnsignedInt(int index, ByteOrder byteOrder) {
-        return getInt(index, byteOrder) & 0xFFFFFFFFL;
+    protected long getUnsignedInt(int index) {
+        return getInt(index) & 0xFFFFFFFFL;
     }
 
-    protected char getChar(int index, ByteOrder byteOrder) {
-        return (char) getShort(index, byteOrder);
+    protected char getChar(int index) {
+        return (char) getShort(index);
     }
 
-    protected float getFloat(int index, ByteOrder byteOrder) {
-        return Float.intBitsToFloat(getInt(index, byteOrder));
+    protected float getFloat(int index) {
+        return Float.intBitsToFloat(getInt(index));
     }
 
-    protected double getDouble(int index, ByteOrder byteOrder) {
-        return Double.longBitsToDouble(getLong(index, byteOrder));
+    protected double getDouble(int index) {
+        return Double.longBitsToDouble(getLong(index));
     }
     
     protected void checkReadableBytes(int minimumReadableBytes) {
@@ -387,7 +398,7 @@ public class ByteBuffer {
         }
     }
     
-    protected short getShort(int index, ByteOrder byteOrder) {
+    protected short getShort(int index) {
         if (ByteOrder.BIG_ENDIAN.equals(byteOrder)) {
             return (short) (array[index] << 8 | array[index + 1] & 0xFF);
         } else {
@@ -395,7 +406,7 @@ public class ByteBuffer {
         }
     }
 
-    protected int getUnsignedMedium(int index, ByteOrder byteOrder) {
+    protected int getUnsignedMedium(int index) {
         if (ByteOrder.BIG_ENDIAN.equals(byteOrder)) {
             return  (array[index]     & 0xff) << 16 |
                     (array[index + 1] & 0xff) <<  8 |
@@ -407,7 +418,7 @@ public class ByteBuffer {
         }
     }
 
-    protected int getInt(int index, ByteOrder byteOrder) {
+    protected int getInt(int index) {
         if (ByteOrder.BIG_ENDIAN.equals(byteOrder)) {
             return  (array[index]     & 0xff) << 24 |
                     (array[index + 1] & 0xff) << 16 |
@@ -421,7 +432,7 @@ public class ByteBuffer {
         }
     }
 
-    protected long getLong(int index, ByteOrder byteOrder) {
+    protected long getLong(int index) {
         if (ByteOrder.BIG_ENDIAN.equals(byteOrder)) {
             return  ((long) array[index]     & 0xff) << 56 |
                     ((long) array[index + 1] & 0xff) << 48 |
@@ -443,7 +454,7 @@ public class ByteBuffer {
         }
     }
 
-    protected void setShort(int index, int value, ByteOrder byteOrder) {
+    protected void setShort(int index, int value) {
         if (ByteOrder.BIG_ENDIAN.equals(byteOrder)) {
             array[index]     = (byte) (value >>> 8);
             array[index + 1] = (byte) value;
@@ -453,7 +464,7 @@ public class ByteBuffer {
         }
     }
 
-    protected void setMedium(int index, int   value, ByteOrder byteOrder) {
+    protected void setMedium(int index, int   value) {
         if (ByteOrder.BIG_ENDIAN.equals(byteOrder)) {
             array[index]     = (byte) (value >>> 16);
             array[index + 1] = (byte) (value >>> 8);
@@ -465,7 +476,7 @@ public class ByteBuffer {
         }
     }
 
-    protected void setInt(int index, int   value, ByteOrder byteOrder) {
+    protected void setInt(int index, int   value) {
         if (ByteOrder.BIG_ENDIAN.equals(byteOrder)) {
             array[index]     = (byte) (value >>> 24);
             array[index + 1] = (byte) (value >>> 16);
@@ -479,7 +490,7 @@ public class ByteBuffer {
         }
     }
 
-    protected void setLong(int index, long  value, ByteOrder byteOrder) {
+    protected void setLong(int index, long  value) {
         if (ByteOrder.BIG_ENDIAN.equals(byteOrder)) {
             array[index]     = (byte) (value >>> 56);
             array[index + 1] = (byte) (value >>> 48);
