@@ -7,6 +7,7 @@
 package com.will.toolkit.util;
 
 
+import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;

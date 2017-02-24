@@ -9,6 +9,6 @@ import org.junit.Test;
 public class CodecTest {
     @Test
     public void testCoder() {
-        Assert.assertEquals("900150983cd24fb0d6963f7d28e17f72",  CodecUtil.md5("abc"));
+        Assert.assertEquals("900150983cd24fb0d6963f7d28e17f721",  CodecUtil.md5("abc"));
     }
 }
