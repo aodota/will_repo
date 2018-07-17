@@ -7,3 +7,4 @@ gradle
 .browse.*
 .DS_Store
 *.iml
+out

@@ -15,7 +15,6 @@ import java.util.concurrent.ConcurrentHashMap;
  * 消息格式化器，解决MessageFormate中的bug
  * @author will
  * @version 1.0.0.0 2011-9-28 下午03:52:09
- *
  */
 public class MessageFormatter {
     /** 文本Pattern */

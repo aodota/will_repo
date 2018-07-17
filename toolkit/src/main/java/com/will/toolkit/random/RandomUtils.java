@@ -196,6 +196,19 @@ public final class RandomUtils {
     }
 
     /**
+     * 随机打乱数组
+     * @param array
+     */
+    public static <E> void randomArray(E[] array) {
+        for (int i = 0; i < array.length - 1; i++) {
+            int index = nextInt(i, array.length);
+            if (index != i) {
+                swap(array, i, index);
+            }
+        }
+    }
+
+    /**
      * 随机打乱List
      * @param list
      */
